@@ -29,10 +29,7 @@ OF1900191801       UFDDN1991918XUY1     01-JAN-25 03.30.20 PM     KMKMH6787     
 ## ❓ Business Questions & SQL Insights
 
 1. 🍽️ Top Outlet by Cuisine Type (Without LIMIT or TOP)
-
 Goal: Identify the most popular outlet for each cuisine.
-
--- SQL logic used to rank outlets per cuisine without LIMIT
 ```sql
 with cuisine as (select cuisine, RESTAURANT_ID, count(order_id) order_cnt 
 from orders_test
