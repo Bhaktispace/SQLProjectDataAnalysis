@@ -139,25 +139,61 @@ Insight: 24 customers meet the reactivation criteria.
 
 Goal: Help the Growth Team personalize engagement.
 
--- SQL to find users who just completed their third order
+```sql
+with cust as (select customer_code
+       , order_id
+       , row_number()over(partition by customer_code order by placed_at) rn
+       , placed_at
+from orders_test)
+select 
+customer_code, order_id, rn
+from cust 
+where mod(rn,3) = 0 
+and trunc(placed_at) = trunc(sysdate)-10 -- so that they can run the query every day and get the customer on that day
 
-Insight: 178 customers are ready for personalized follow-up.
+```
+
+Insight: 2 customers are ready for personalized follow-up.
 
 6. 🤑 Customers with All Orders on Promo Only
 
 Goal: Identify price-sensitive users.
 
--- SQL to find users with only promo-based orders
+```sql
+with customers_with_orders as (
+select customer_code
+       , count(order_id) as order_cnt
+       , count(case when promo_code_name is not null then 1 end) promo
+       , count(case when promo_code_name is null then 1 end) no_promo
+from orders_test
+group by customer_code
+having count(order_id)>1)
+select customer_code
+from customers_with_orders where no_promo=0
 
-Insight: 73 customers always use promos for their orders.
+```
+
+Insight: 2 customers always use promos for their orders.
 
 7. ✨ Organic Acquisition % in Jan 2025
 
 Goal: Measure the share of organic (non-promo) customer acquisition.
 
--- SQL to calculate percent of users with no promo code on first order
+```sql
+with cust as (
+select customer_code
+       , placed_at
+       , promo_code_name
+       , row_number()over(partition by customer_code order by placed_at) rn
+from orders_test
+where extract(month from placed_at) =1
+)
+select count(case when promo_code_name is null then 1 end)/count(*) *100 pct
+from cust 
+where rn =1
+```
 
-Insight: 62% of customers in January were acquired organically.
+Insight: 43.9% of customers in January were acquired organically.
 
 ## 🎯 Final Takeaways
 
