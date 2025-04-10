@@ -96,25 +96,7 @@ Goal: Measure the share of organic (non-promo) customer acquisition.
 
 Insight: 62% of customers in January were acquired organically.
 
-📊 Optional Visuals
-
-Visuals can help tell the story better. Suggested charts:
-
-Line chart: Daily new customers
-
-Pie chart: Promo vs. Organic acquisition
-
-Bar chart: Top cuisine types
-
-Tools you can use:
-
-Excel / Google Sheets
-
-Tableau / Power BI
-
-Python (matplotlib, seaborn)
-
-🎯 Final Takeaways
+## 🎯 Final Takeaways
 
 This SQL-driven analysis provided insights into:
 
@@ -128,7 +110,7 @@ Personalization triggers
 
 These findings can support targeted marketing campaigns, improve retention strategies, and help product teams refine customer journeys.
 
-🔍 About This Project
+## 🔍 About This Project
 
 This project showcases my ability to derive insights from raw transactional data using SQL. It simulates a real-world scenario of launching a new product and needing actionable data to support business growth and customer retention strategies.
 
