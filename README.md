@@ -3,7 +3,7 @@
 
 In this project, I analyzed customer and order data from a food delivery app that launched in January 2025. Using SQL, I explored customer acquisition trends, order behaviors, promo usage, and engagement patterns to generate actionable business insights. The analysis was focused on supporting growth and marketing strategies with sample user data for 3 months.
 
-📂 Dataset Description
+## 📂 Dataset Description
 
 The dataset consists of order-level information with the following key columns:
 
@@ -26,7 +26,7 @@ Sample row:
 ORDER_ID           CUSTOMER_CODE        PLACED_AT                 RESTAURANT_ID   CUISINE   ORDER_STATUS   PROMO_CODE_NAME
 OF1900191801       UFDDN1991918XUY1     01-JAN-25 03.30.20 PM     KMKMH6787       Lebanese  Delivered       Tasty50
 
-❓ Business Questions & SQL Insights
+## ❓ Business Questions & SQL Insights
 
 1. 🍽️ Top Outlet by Cuisine Type (Without LIMIT or TOP)
 
