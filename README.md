@@ -114,9 +114,26 @@ Insight: 32 customers ordered only once in January 2025.
 
 Goal: Detect users who are inactive but were acquired via promo.
 
--- SQL to find inactive users who haven't ordered in the last 7 days
+```sql
+with promo_cust as (
+select customer_code
+       , min((placed_at)) first_order_date
+       , max((placed_at)) latest_order_date
+from orders_test
+group by customer_code)
 
-Insight: 42 customers meet the reactivation criteria.
+select pc.*, ot.promo_code_name
+from promo_cust pc
+inner join orders_test ot
+on pc.customer_code = ot.customer_code
+and pc.first_order_date = ot.placed_at
+where latest_order_date < (sysdate-10)-7 -- the data is till 31-march and as i am doing this on 10 Apr so subtracting those days
+and first_order_date < add_months(sysdate-10,-1)
+and ot.promo_code_name is not null
+
+```
+
+Insight: 24 customers meet the reactivation criteria.
 
 5. 🎉 Trigger Campaign Post Third Order
 
