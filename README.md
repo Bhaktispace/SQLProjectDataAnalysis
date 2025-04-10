@@ -33,7 +33,22 @@ OF1900191801       UFDDN1991918XUY1     01-JAN-25 03.30.20 PM     KMKMH6787     
 Goal: Identify the most popular outlet for each cuisine.
 
 -- SQL logic used to rank outlets per cuisine without LIMIT
+```sql
+with cuisine as (select cuisine, RESTAURANT_ID, count(order_id) order_cnt 
+from orders_test
+group by cuisine, RESTAURANT_ID)
 
+select cuisine,
+       RESTAURANT_ID
+from 
+(select cuisine,
+       RESTAURANT_ID,
+       order_cnt,
+       row_number()over(partition by cuisine order by order_cnt desc) rn
+from cuisine)
+where rn=1
+;
+```
 Insight: Outlet "KMKMH6787" leads in Lebanese cuisine.
 
 2. 📅 Daily New Customer Count Since Launch
