@@ -78,9 +78,37 @@ Insight: Peak acquisition occurred on Jan 31, 2025 with 4 new customers.
 
 Goal: Identify users who ordered once in Jan and never returned.
 
--- SQL to find customers with one order in Jan only
+```sql
+with cust_orders as (
+select customer_code
+       , min(trunc(placed_at)) as order_date
+       , extract(month from placed_at) order_month
+       , extract(year from placed_at) order_year
+       , order_id
+from orders_test
+group by customer_code
+         , extract(month from placed_at)
+         , extract(year from placed_at)
+         , order_id
+),
+jan_cust as (
+select distinct customer_code
+       , count(order_id)
+from cust_orders 
+where (order_month=1 and order_year=2025)
+group by customer_code
+having count(order_id) =1
+),
+not_jan_cust as (
+select distinct customer_code
+from cust_orders where not order_month=1 and order_year=2025
+)
+select * 
+from jan_cust  
+where customer_code  not in (select customer_code from not_jan_cust);
 
-Insight: 350 customers ordered only once in January 2025.
+```
+Insight: 32 customers ordered only once in January 2025.
 
 4. ❌ Dormant Customers Acquired a Month Ago with First Promo Order
 
