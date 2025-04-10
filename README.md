@@ -208,8 +208,3 @@ Churn and re-engagement opportunities
 Personalization triggers
 
 These findings can support targeted marketing campaigns, improve retention strategies, and help product teams refine customer journeys.
-
-## 🔍 About This Project
-
-This project showcases my ability to derive insights from raw transactional data using SQL. It simulates a real-world scenario of launching a new product and needing actionable data to support business growth and customer retention strategies.
-
