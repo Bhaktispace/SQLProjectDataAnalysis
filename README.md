@@ -24,6 +24,7 @@ PROMO_CODE_NAME: Name of the promo code used (if any)
 Sample row:
 
 ORDER_ID           CUSTOMER_CODE        PLACED_AT                 RESTAURANT_ID   CUISINE   ORDER_STATUS   PROMO_CODE_NAME
+
 OF1900191801       UFDDN1991918XUY1     01-JAN-25 03.30.20 PM     KMKMH6787       Lebanese  Delivered       Tasty50
 
 ## ❓ Business Questions & SQL Insights
@@ -46,15 +47,32 @@ from cuisine)
 where rn=1
 ;
 ```
-Insight: Outlet "KMKMH6787" leads in Lebanese cuisine.
+Insight: Outlet "BURGER99" leads in American cuisine
+Outlet "PIZZA123" leads in Italian cuisine
+Outlet "SUSHI456" leads in Japanese
+Outelt "KMKMH6787" leads in Lebanese
+Outlet "TACO789" leads in TACO789
 
 2. 📅 Daily New Customer Count Since Launch
 
 Goal: Understand daily new user acquisition trends.
 
--- SQL to calculate number of new users by day
+```sql
+with cust_orders as (
+select customer_code,
+       min(trunc(placed_at)) as order_date
+from orders_test
+group by customer_code
+)
+select order_date
+       , count(customer_code)
+from cust_orders
+group by order_date
+order by order_date
 
-Insight: Peak acquisition occurred on Jan 15, 2025 with 550 new customers.
+```
+
+Insight: Peak acquisition occurred on Jan 31, 2025 with 4 new customers.
 
 3. 🤔 One-Time Customers in Jan 2025
 
