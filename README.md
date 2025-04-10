@@ -1,7 +1,7 @@
 # 🍔 Customer Insights & Order Behavior Analysis for a Food Delivery App Launch
 📚 Project Overview
 
-In this project, I analyzed customer and order data from a food delivery app that launched in January 2025. Using SQL, I explored customer acquisition trends, order behaviors, promo usage, and engagement patterns to generate actionable business insights. The analysis was focused on supporting growth and marketing strategies with real user data.
+In this project, I analyzed customer and order data from a food delivery app that launched in January 2025. Using SQL, I explored customer acquisition trends, order behaviors, promo usage, and engagement patterns to generate actionable business insights. The analysis was focused on supporting growth and marketing strategies with sample user datafor 3 months.
 
 📂 Dataset Description
 
