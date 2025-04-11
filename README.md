@@ -1,9 +1,9 @@
 # 🍔 Customer Insights & Order Behavior Analysis for a Food Delivery App Launch
-## 📚 Project Overview
+## Project Overview
 
 In this project, I analyzed customer and order data from a food delivery app that launched in January 2025. Using SQL, I explored customer acquisition trends, order behaviors, promo usage, and engagement patterns to generate actionable business insights. The analysis was focused on supporting growth and marketing strategies with sample user data for 3 months.
 
-## 📂 Dataset Description
+## Dataset Description
 
 The dataset consists of order-level information with the following key columns:
 
@@ -29,7 +29,7 @@ OF1900191801       UFDDN1991918XUY1     01-JAN-25 03.30.20 PM     KMKMH6787     
 
 ## ❓ Business Questions & SQL Insights
 
-1. 🍽️ Top Outlet by Cuisine Type (Without LIMIT or TOP)
+1. Top Outlet by Cuisine Type (Without LIMIT or TOP)
 Goal: Identify the most popular outlet for each cuisine.
 ```sql
 with cuisine as (select cuisine, RESTAURANT_ID, count(order_id) order_cnt 
@@ -53,7 +53,7 @@ Outlet "SUSHI456" leads in Japanese
 Outelt "KMKMH6787" leads in Lebanese
 Outlet "TACO789" leads in TACO789
 
-2. 📅 Daily New Customer Count Since Launch
+2. Daily New Customer Count Since Launch
 
 Goal: Understand daily new user acquisition trends.
 
@@ -74,7 +74,7 @@ order by order_date
 
 Insight: Peak acquisition occurred on Jan 31, 2025 with 4 new customers.
 
-3. 🤔 One-Time Customers in Jan 2025
+3. One-Time Customers in Jan 2025
 
 Goal: Identify users who ordered once in Jan and never returned.
 
@@ -110,7 +110,7 @@ where customer_code  not in (select customer_code from not_jan_cust);
 ```
 Insight: 32 customers ordered only once in January 2025.
 
-4. ❌ Dormant Customers Acquired a Month Ago with First Promo Order
+4. Dormant Customers Acquired a Month Ago with First Promo Order
 
 Goal: Detect users who are inactive but were acquired via promo.
 
@@ -135,7 +135,7 @@ and ot.promo_code_name is not null
 
 Insight: 24 customers meet the reactivation criteria.
 
-5. 🎉 Trigger Campaign Post Third Order
+5. Trigger Campaign Post Third Order
 
 Goal: Help the Growth Team personalize engagement.
 
@@ -155,7 +155,7 @@ and trunc(placed_at) = trunc(sysdate)-10 -- so that they can run the query every
 
 Insight: 2 customers are ready for personalized follow-up.
 
-6. 🤑 Customers with All Orders on Promo Only
+6. Customers with All Orders on Promo Only
 
 Goal: Identify price-sensitive users.
 
@@ -175,7 +175,7 @@ from customers_with_orders where no_promo=0
 
 Insight: 2 customers always use promos for their orders.
 
-7. ✨ Organic Acquisition % in Jan 2025
+7. Organic Acquisition % in Jan 2025
 
 Goal: Measure the share of organic (non-promo) customer acquisition.
 
